@@ -1,0 +1,53 @@
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an object of the Test class
+        Test testObject = new Test();
+
+        // Invoke method1 by providing the parameter name
+        try {
+            Method method1 = testObject.getClass().getMethod("method1");
+            method1.invoke(testObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Invoke method1 by providing the parameter name and class
+        try {
+            Method method1 = testObject.getClass().getMethod("method1");
+            method1.invoke(testObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Print the value of the field s
+        try {
+            Field fieldS = testObject.getClass().getDeclaredField("s");
+            fieldS.setAccessible(true); // Enable access to the private field
+            System.out.println("Value of field s: " + fieldS.get(testObject));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Update the value of the field s
+        try {
+            Field fieldS = testObject.getClass().getDeclaredField("s");
+            fieldS.setAccessible(true);
+            fieldS.set(testObject, "New Value"); // Change the value of s
+            System.out.println("Updated value of field s: " + fieldS.get(testObject));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Enable access to the private method and invoke it
+        try {
+            Method method3 = testObject.getClass().getDeclaredMethod("method3");
+            method3.setAccessible(true);
+            method3.invoke(testObject);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
