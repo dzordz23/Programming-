@@ -1,0 +1,43 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class TwoDArraySumAverage {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            System.out.print("Number of rows: ");
+            int rows = scanner.nextInt();
+
+            System.out.print("Number of columns: ");
+            int columns = scanner.nextInt();
+
+            int[][] array = new int[rows][columns];
+
+            // Input elements into the array
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    System.out.printf("Enter element at position (%d, %d): ", i, j);
+                    array[i][j] = scanner.nextInt();
+                }
+            }
+            int sum = 0;
+            for (int[] row : array) {
+                for (int element : row) {
+                    sum += element;
+                }
+            }
+            double average = (double) sum / (rows * columns);
+
+            
+            System.out.println("The sum: " + sum);
+            System.out.println("The average: " + average);
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter integer values.");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
